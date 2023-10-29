@@ -4,9 +4,9 @@ public interface State {
 
     public boolean validarRegistro(String matricula) throws Exception;
 
-    public boolean validarCurso(String course) throws Exception;
+    public boolean validarCurso(String curso) throws Exception;
 
-    public boolean validarCartao(CartaoCredito card, Cursos curso) throws Exception;
+    public boolean validarCartao(CartaoCredito card) throws Exception;
 
     public String criarInscricao() throws Exception;
 }

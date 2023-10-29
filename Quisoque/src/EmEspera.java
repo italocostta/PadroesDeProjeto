@@ -22,7 +22,7 @@ public class EmEspera implements State{
     }
 
     
-    public boolean validarCartao(CartaoCredito card, Cursos curso) throws Exception {
+    public boolean validarCartao(CartaoCredito card) throws Exception {
         throw new UnsupportedOperationException("Não é possível validar cartão no estado de espera.");
     }
 

@@ -18,7 +18,7 @@ public class Finalizado implements State{
         throw new UnsupportedOperationException("Não é possível validar curso no estado de finalizado.");
     }
 
-    public boolean validarCartao(CartaoCredito card, Cursos curso) throws Exception {
+    public boolean validarCartao(CartaoCredito card) throws Exception {
         throw new UnsupportedOperationException("Não é possível validar cartão no estado de finalizado.");
     }
 

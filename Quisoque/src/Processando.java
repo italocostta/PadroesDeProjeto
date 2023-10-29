@@ -18,12 +18,8 @@ public class Processando implements State {
         throw new UnsupportedOperationException("Não é possível validar curso no estado de processando.");
     }
 
-    public boolean validarCartao(CartaoCredito card, Cursos curso) throws Exception {
-        if (card.getSaldo() >= curso.getValorCurso()) {
-            return true;
-        } else {
-            return false;
-        }
+    public boolean validarCartao(CartaoCredito card) throws Exception {
+        throw new UnsupportedOperationException("Não é possível validar cartão no estado de processando.");
     }
 
     public String criarInscricao() throws Exception {

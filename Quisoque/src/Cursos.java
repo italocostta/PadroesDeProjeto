@@ -2,17 +2,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cursos {
-    private String name;
+    private String nome;
     private Double valorCurso;
+    private int alunosMax = 10;
     private List<String> alunos = new ArrayList<String>();
 
-    public Cursos(String name, Double valorCurso) {
-        this.name = name;
+    public Cursos(String nome, Double valorCurso) {
+        this.nome = nome;
         this.valorCurso = valorCurso;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
     public Double getValorCurso() {
@@ -23,8 +24,18 @@ public class Cursos {
         return alunos;
     }
 
-    public boolean addStudent(String aluno) {
-        return !alunos.add(aluno);
+    public int getAlunosMax() {
+        return alunosMax;
     }
-    
+
+
+   public boolean addAluno(String aluno) {
+        if (alunos.size() < alunosMax) {
+            alunos.add(aluno);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
