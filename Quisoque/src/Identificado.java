@@ -22,6 +22,7 @@ public class Identificado implements State{
         
         if (cursos.containsKey(curso)) {
             if (cursos.get(curso).getAlunos().size() < cursos.get(curso).getCapacidadeAluno()) {
+                mudarEstado();
                 return true;
             } else {
                 throw new Exception("Curso atingiu a capacidade máxima de alunos");
@@ -29,6 +30,11 @@ public class Identificado implements State{
         } else {
             throw new Exception("Curso não encontrado");
         }
+    }
+
+    public boolean validarCartao(CartaoCredito card) throws Exception {
+    
+        throw new UnsupportedOperationException("Não pode validar cartão no estado emEspera");
     }
 
     public String criarInscricao() throws Exception {

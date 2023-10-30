@@ -22,7 +22,7 @@ public class BancoCursos {
     }
 
     public Map<String, Cursos> getCursos() {
-        return cursos;
+        return new BancoCursos().cursos;
     }
     
     

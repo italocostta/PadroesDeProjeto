@@ -33,5 +33,10 @@ public class EmEspera implements State {
         throw new UnsupportedOperationException("Não pode criar ticket no estado emEspera");
     }
 
+    public boolean validarCartao(CartaoCredito card) throws Exception {
+    
+        throw new UnsupportedOperationException("Não pode validar cartão no estado emEspera");
+    }
+
 
 }

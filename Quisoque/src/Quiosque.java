@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Quiosque {
 
@@ -29,4 +32,13 @@ public class Quiosque {
 
     public void setState(Identificado identificado) {
     }
+
+    public void setState(Inscrito inscrito) {
+    }
+
+    public Object getCurso() {
+        return null;
+    }
+
+    
 }
