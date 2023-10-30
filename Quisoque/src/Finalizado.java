@@ -1,15 +1,13 @@
-
-public class Inscrito implements State{
+public class Finalizado implements State{
 
     private Quiosque contexto;
 
-
-    public Inscrito(Quiosque contexto) {
+    public Finalizado(Quiosque contexto) {
         this.contexto = contexto;
     }
 
     public void mudarEstado() {
-        contexto.setState(new Finalizado(contexto));
+        contexto.setState(new EmEspera(contexto));
     }
 
     public boolean validarRegistro(String input) throws Exception {
@@ -21,7 +19,6 @@ public class Inscrito implements State{
     }
 
     public boolean validarCurso(String course) throws Exception {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'validateCourse'");
     }
 
@@ -29,5 +26,5 @@ public class Inscrito implements State{
     public String criarInscricao() throws Exception {
         throw new UnsupportedOperationException("Ticket já foi criado");
     }
-
+    
 }

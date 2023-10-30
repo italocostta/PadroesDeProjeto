@@ -6,7 +6,6 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Quiosque contexto = new Quiosque();
-        double saldo = 0.0; // Saldo inicial do usuário
 
         while (true) {
             if (!contexto.hasAvailableCourse()) {
@@ -29,57 +28,74 @@ public class Main {
                     continue;
                 }
             } else if (contexto.getState() instanceof Identificado) {
-                List<String> availableCourses = new ArrayList<>();
-                availableCourses.add("GPT");
-                availableCourses.add("BLOCKCHAIN");
-                availableCourses.add("IOT");
-                availableCourses.add("VR");
+                System.out.println("Cursos disponíveis");
+                System.out.println("1 - GPT");
+                System.out.println("2 - BLOCKCHAIN");
+                System.out.println("3 - IOT");
+                System.out.println("4 - VR");
 
-                System.out.println("Cursos disponíveis:");
-                for (int i = 0; i < availableCourses.size(); i++) {
-                    System.out.println((i + 1) + " - " + availableCourses.get(i));
-                }
+                System.out.print("Escolha o curso: ");
+                int curso = sc.nextInt();
+                try {
+                    if (curso > 4) {
+                        System.out.println("Curso inválido");
+                    } else {
+                        boolean valid = false;
+                        switch (curso) {
+                            case 1:
+                                valid = contexto.validarCurso("GPT");
+                                break;
+                            case 2:
+                                valid = contexto.validarCurso("BLOCKCHAIN");
+                                break;
+                            case 3:
+                                valid = contexto.validarCurso("IOT");
+                                break;
+                            case 4:
+                                valid = contexto.validarCurso("VR");
+                                break;
+                            default:
+                                System.out.println("Curso inválido");
+                                continue;
+                        }
 
-                System.out.print("Escolha o número do curso: ");
-                int selectedCourseIndex = sc.nextInt();
-                if (selectedCourseIndex < 1 || selectedCourseIndex > availableCourses.size()) {
-                    System.out.println("Curso inválido");
+                        if (valid) {
+                            System.out.println("Curso escolhido com sucesso");
+                        } else {
+                            System.out.println("Curso indisponível");
+                            continue;
+                        }
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
                     continue;
                 }
-
-                String selectedCourse = availableCourses.get(selectedCourseIndex - 1);
-
+            } else if (contexto.getState() instanceof Processando) {
+                sc.nextLine();
+            
+                CartaoCredito cartao = new CartaoCredito();
                 try {
-                    boolean valid = contexto.validarCurso(selectedCourse);
-                    if (valid) {
-                        System.out.println("Curso escolhido com sucesso: " + selectedCourse);
+                    boolean valido = contexto.validarCartao(cartao);
+                    if (valido) {
+                        System.out.println("Cartão validado com sucesso!");
                     } else {
-                        System.out.println("Curso indisponível");
+                        System.out.println("Cartão inválido");
                         continue;
                     }
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                     continue;
                 }
-            } else if (contexto.getState() instanceof Inscrito) {
-                System.out.print("Digite o valor desejado: ");
-                double valorDesejado = sc.nextDouble();
-                
-                if (valorDesejado > saldo) {
-                    System.out.println("Saldo insuficiente. Seu saldo é: " + saldo);
+            } else if(contexto.getState() instanceof Inscrito) {
+                System.out.println("Inscrição finalizada com sucesso!");
+                System.out.println("Deseja realizar outra inscrição? (S/N)");
+                String opcao = sc.nextLine();
+                if (opcao.equals("S")) {
+                    contexto.setState(new EmEspera(contexto));
                     continue;
+                } else {
+                    break;
                 }
-
-                try {
-                    System.out.println("Ticket criado: " + contexto.criarInscricao());
-                    saldo -= valorDesejado; // Deduzir o valor do saldo
-                    System.out.println("Saldo restante: " + saldo);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                    continue;
-                }
-            } else {
-                contexto.mudarEstado();
             }
         }
     }
