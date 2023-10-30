@@ -1,8 +1,7 @@
-import java.util.Arrays;
-import java.util.List;
+import java.util.Map;
 
 public class Identificado implements State{
-    
+
     private Quiosque contexto;
 
     public Identificado(Quiosque contexto) {
@@ -10,26 +9,31 @@ public class Identificado implements State{
     }
 
     public void mudarEstado() {
-        contexto.setEstado(new EmEspera(contexto));
+        contexto.setState(new Processando(contexto));
     }
 
-    public boolean validarRegistro(String matricula) throws Exception {
-        throw new UnsupportedOperationException("Não é possível validar registro no estado de identificado.");
+    public boolean validarRegistro(String matricula) {
+        throw new UnsupportedOperationException("Usuário já identificado");
     }
 
-    
     public boolean validarCurso(String curso) throws Exception {
-        List<String> cursosDisponiveis = Arrays.asList("ChatGPT em Detalhes", "Blockchain", "IoT", "Realidade Virtual");
-        return cursosDisponiveis.contains(curso);
-    }
-
-    
-    public boolean validarCartao(CartaoCredito card) throws Exception {
-        throw new UnsupportedOperationException("Não é possível validar cartão no estado de espera.");
+        BancoCursos bancoCursos = new BancoCursos();
+        Map<String, Cursos> cursos = bancoCursos.getCursos();
+        
+        if (cursos.containsKey(curso)) {
+            if (cursos.get(curso).getAlunos().size() < cursos.get(curso).getCapacidadeAluno()) {
+                return true;
+            } else {
+                throw new Exception("Curso atingiu a capacidade máxima de alunos");
+            }
+        } else {
+            throw new Exception("Curso não encontrado");
+        }
     }
 
     public String criarInscricao() throws Exception {
-        throw new UnsupportedOperationException("Não é possível criar inscrição no estado de espera.");
+     
+        throw new UnsupportedOperationException("Não pode criar ticket no estado emEspera");
     }
-    
+
 }

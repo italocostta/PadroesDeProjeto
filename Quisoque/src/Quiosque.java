@@ -1,56 +1,32 @@
-import java.util.List;
 
-class Quiosque {
+public class Quiosque {
 
-    private State estado;
-    private String aluno;
-    private Cursos curso;
+    private State contexto;
 
     public Quiosque() {
-        this.estado = new EmEspera(this);
+        contexto = new EmEspera(this);
     }
 
-    public void setEstado(State estado) {
-        this.estado = estado;
+    public void setState(Processando processando) {
+        contexto = processando;
     }
 
-    public State getEstado() {
-        return this.estado;
+    public void validarRegistro(String matricula) throws Exception {
+        contexto.validarRegistro(matricula);
     }
 
-    public String getAluno() {
-        return this.aluno = aluno;
+    public void validarCurso(String curso) throws Exception {
+        contexto.validarCurso(curso);
     }
 
-    public void setAluno(String aluno) {
-        this.aluno = aluno;
+
+    public void criarInscricao() throws Exception {
+        contexto.criarInscricao();
     }
 
-    public Cursos getCurso() {
-        return this.curso;
+    public void setAluno(String matricula) {
     }
 
-    public void setCurso(Cursos curso) {
-        this.curso = curso;
-    }
-
-    public void mudarEstado() {
-        this.estado.mudarEstado();
-    }
-
-    public boolean validarRegistro(String matricula) throws Exception {
-        return estado.validarRegistro(matricula);
-    }
-
-    public boolean validarCurso(String curso) throws Exception {
-        return estado.validarCurso(curso);
-    }
-
-    public boolean validarCartao(CartaoCredito card, Cursos curso) throws Exception {
-        return estado.validarCartao(card);
-    }
-
-    public String criarInscricao() throws Exception {
-        return estado.criarInscricao();
+    public void setState(Identificado identificado) {
     }
 }

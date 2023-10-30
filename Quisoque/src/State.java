@@ -6,7 +6,5 @@ public interface State {
 
     public boolean validarCurso(String curso) throws Exception;
 
-    public boolean validarCartao(CartaoCredito card) throws Exception;
-
     public String criarInscricao() throws Exception;
 }

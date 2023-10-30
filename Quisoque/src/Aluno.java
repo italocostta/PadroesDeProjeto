@@ -1,12 +1,20 @@
-class Aluno {
-    private String matricula;
+public class Aluno {
 
-    public Aluno(String matricula) {
-        this.matricula = matricula;
+    private String aluno;
+
+    public Aluno(String aluno) {
+        this.aluno = aluno;
     }
 
-    public String getMatricula() {
-        return matricula;
+    public String getAluno() {
+        return aluno;
     }
 
+    public void setAluno(String aluno) {
+        if (aluno == null || aluno.isEmpty()) {
+            throw new UnsupportedOperationException("Matrícula inválida");
+        }
+        this.aluno = aluno;
+    }
+    
 }

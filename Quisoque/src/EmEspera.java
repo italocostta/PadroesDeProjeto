@@ -1,4 +1,5 @@
-public class EmEspera implements State{
+public class EmEspera implements State {
+
     private Quiosque contexto;
 
     public EmEspera(Quiosque contexto) {
@@ -6,27 +7,31 @@ public class EmEspera implements State{
     }
 
     public void mudarEstado() {
-        contexto.setEstado(new Identificado(contexto));
+        contexto.setState(new Identificado(contexto));
     }
 
     public boolean validarRegistro(String matricula) {
-        if (matricula != null && !matricula.isEmpty()) {
+        BancoEstudantes bancoEstudantes = new BancoEstudantes();
+        contexto.setAluno(matricula);
+
+        if (bancoEstudantes.contains(matricula)) {
+            mudarEstado();
             return true;
-        } else {
+        } 
+        else {
             return false;
         }
     }
 
-    public boolean validarCurso(String course) throws Exception {
-        throw new UnsupportedOperationException("Não é possível validar curso no estado de espera.");
-    }
+    public boolean validarCurso(String curso) throws Exception {
 
-    
-    public boolean validarCartao(CartaoCredito card) throws Exception {
-        throw new UnsupportedOperationException("Não é possível validar cartão no estado de espera.");
+        throw new UnsupportedOperationException("Não pode validar curso no estado emEspera");
     }
 
     public String criarInscricao() throws Exception {
-        throw new UnsupportedOperationException("Não é possível criar inscrição no estado de espera.");
+     
+        throw new UnsupportedOperationException("Não pode criar ticket no estado emEspera");
     }
+
+
 }
